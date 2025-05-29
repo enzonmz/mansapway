@@ -3,14 +3,14 @@ import { useState } from 'react';
 const AuthPage = () => {
   const [activeTab, setActiveTab] = useState('login');
   const [errors, setErrors] = useState({});
-
+  
   // Состояние для формы входа
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
     rememberMe: false
   });
-
+  
   // Состояние для формы регистрации
   const [registerData, setRegisterData] = useState({
     name: '',
@@ -67,32 +67,7 @@ const AuthPage = () => {
     if (validateLogin()) {
       console.log('Отправка данных входа:', loginData);
       // Здесь будет запрос к API
-      const login_data = {
-        email: loginData.email,
-        password: loginData.password
-      };
-      fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(login_data)
-      })
-        .then(async response => {
-          const text = await response.text();
-          if (!response.ok) {
-            throw new Error(text || 'Ошибка при регистрации');
-          }
-          return text; // <- возвращаем сам JWT
-        })
-        .then(jwt => {
-          console.log("Полученный JWT:", jwt);
-          alert('Вход выполнен успешно!');
-        })
-        .catch(error => {
-          console.error('Ошибка:', error.message);
-          alert(`Ошибка регистрации: ${error.message}`);
-        });
+      alert('Вход выполнен успешно!');
     }
   };
 
@@ -101,40 +76,15 @@ const AuthPage = () => {
     e.preventDefault();
     if (validateRegister()) {
       console.log('Отправка данных регистрации:', registerData);
-      const register_data = {
-        username: registerData.name,
+      // Здесь будет запрос к API
+      alert('Регистрация прошла успешно! Выполняется вход...');
+      // Переключаем на вкладку входа и заполняем данные
+      setActiveTab('login');
+      setLoginData({
         email: registerData.email,
-        password: registerData.password
-      };
-
-      fetch('http://localhost:8080/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(register_data)
-      })
-        .then(async response => {
-          const text = await response.text(); // <- получаем текст, а не JSON
-          if (!response.ok) {
-            throw new Error(text || 'Ошибка при регистрации');
-          }
-          return text; // <- возвращаем сам JWT
-        })
-        .then(jwt => {
-          console.log("Полученный JWT:", jwt);
-          alert('Регистрация прошла успешно! Выполняется вход...');
-          setActiveTab('login');
-          setLoginData({
-            email: registerData.email,
-            password: registerData.password,
-            rememberMe: false
-          });
-        })
-        .catch(error => {
-          console.error('Ошибка:', error.message);
-          alert(`Ошибка регистрации: ${error.message}`);
-        });
+        password: registerData.password,
+        rememberMe: false
+      });
     }
   };
 
@@ -177,7 +127,7 @@ const AuthPage = () => {
               />
               {errors.email && <p className="error-message">{errors.email}</p>}
             </div>
-
+            
             <div>
               <label htmlFor="loginPassword" className="block text-sm font-medium text-gray-700">Пароль</label>
               <input
@@ -190,7 +140,7 @@ const AuthPage = () => {
               />
               {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
-
+            
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -203,12 +153,12 @@ const AuthPage = () => {
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">Запомнить меня</label>
               </div>
-
+              
               <div className="text-sm">
                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Забыли пароль?</a>
               </div>
             </div>
-
+            
             <div>
               <button
                 type="submit"
@@ -235,7 +185,7 @@ const AuthPage = () => {
               />
               {errors.name && <p className="error-message">{errors.name}</p>}
             </div>
-
+            
             <div>
               <label htmlFor="registerEmail" className="block text-sm font-medium text-gray-700">Email</label>
               <input
@@ -248,7 +198,7 @@ const AuthPage = () => {
               />
               {errors.email && <p className="error-message">{errors.email}</p>}
             </div>
-
+            
             <div>
               <label htmlFor="registerPassword" className="block text-sm font-medium text-gray-700">Пароль</label>
               <input
@@ -261,7 +211,7 @@ const AuthPage = () => {
               />
               {errors.password && <p className="error-message">{errors.password}</p>}
             </div>
-
+            
             <div>
               <label htmlFor="registerConfirmPassword" className="block text-sm font-medium text-gray-700">Подтвердите пароль</label>
               <input
@@ -274,7 +224,7 @@ const AuthPage = () => {
               />
               {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
             </div>
-
+            
             <div className="flex items-center">
               <input
                 id="terms"
@@ -289,7 +239,7 @@ const AuthPage = () => {
               </label>
             </div>
             {errors.agreeTerms && <p className="error-message">{errors.agreeTerms}</p>}
-
+            
             <div>
               <button
                 type="submit"
@@ -300,7 +250,7 @@ const AuthPage = () => {
             </div>
           </form>
         )}
-
+        
         {/* Социальные кнопки */}
         <div className="mt-6">
           <div className="relative">
@@ -311,7 +261,7 @@ const AuthPage = () => {
               <span className="px-2 bg-white text-gray-500">Или войдите через</span>
             </div>
           </div>
-
+          
           <div className="mt-6 grid grid-cols-2 gap-3">
             <div>
               <button
@@ -324,7 +274,7 @@ const AuthPage = () => {
                 </svg>
               </button>
             </div>
-
+            
             <div>
               <button
                 onClick={() => handleSocialLogin('Facebook')}

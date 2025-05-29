@@ -1,4 +1,5 @@
 import React from "react";
+import AimyBot from '../components/ChatBot';
 
 const profileData = {
   name: "Лилит Дульян",
@@ -77,6 +78,8 @@ const Users = () => {
           </div>
         </div>
       </div>
+      <AimyBot />
+
     </div>
   );
 };

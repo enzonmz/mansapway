@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import AimBot from '../components/AimBot';
+import ChatBot from '../components/ChatBot';
 
 // Данные для секций
 const features = [
@@ -46,6 +46,7 @@ const HomePage = () => {
 
   return (
     <div className="relative min-h-screen">
+         <ChatBot />
       {/* Геройская секция */}
       <motion.div
         className="min-h-screen bg-cover bg-center flex items-center justify-center text-white"
@@ -69,7 +70,7 @@ const HomePage = () => {
           <motion.p className="text-lg sm:text-xl max-w-xl mx-auto" variants={fadeInUp}>
             Мы помогаем студентам колледжей определить подходящую профессию на основе их навыков, интересов и трендов рынка труда Казахстана.
           </motion.p>
-          <AimBot />
+ 
         </motion.div>
       </motion.div>
 

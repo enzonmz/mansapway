@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
+import AimyBot from '../components/ChatBot';
 
 export default function ProfileForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-
+ 
   const onSubmit = (data) => {
     console.log('Данные формы:', data);
   };
@@ -140,6 +141,8 @@ export default function ProfileForm() {
           </motion.div>
         </div>
       </main>
+      <AimyBot />
+
     </div>
   );
 }

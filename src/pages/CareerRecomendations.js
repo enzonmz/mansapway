@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AimyBot from '../components/ChatBot';
 
 const CareerRecommendations = () => {
   const [recommendations, setRecommendations] = useState([]);
@@ -143,6 +144,8 @@ const CareerRecommendations = () => {
           </div>
         </div>
       </motion.div>
+      <AimyBot />
+
     </div>
   );
 };
